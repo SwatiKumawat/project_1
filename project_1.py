@@ -8,7 +8,19 @@ import cv2 as cv
 #import sys
 
 # reading image
-img = cv.imread("test.png",0)
+img = cv.imread("test.png")
+#converting image to gray
+bw = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+#applying thresholding on a white abackground image
+ret,thresh = cv2.threshold(bw,150,255,cv2.THRESH_BINARY)
+
+#showing the images 
+cv2.imshow("original",img)
+cv2.imshow("grayimg",bw)
+cv2.imshow("thresholded",thresh)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 config = ('-l eng --oem 1 --psm 3')
 #converting image text to string
