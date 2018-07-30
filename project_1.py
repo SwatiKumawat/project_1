@@ -11,13 +11,18 @@ import cv2 as cv
 img = cv.imread("test.png")
 #converting image to gray
 bw = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-#applying thresholding on a white abackground image
+#applying thresholding on a white background image
 ret,thresh = cv2.threshold(bw,150,255,cv2.THRESH_BINARY)
+adapt_thresh = cv2.adaptiveThresold(bw,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,115,1)
+
+# cleaning black image 
+th,dst = cv2.threshold(bw,50,255,cv2.THRESH_BINARY_INV)
 
 #showing the images 
 cv2.imshow("original",img)
 cv2.imshow("grayimg",bw)
 cv2.imshow("thresholded",thresh)
+cv2.imshow("adaptive",adapt_thresh)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
